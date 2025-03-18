@@ -1,22 +1,40 @@
 import Model.Bottle;
+import Service.BottleBuilder;
+import Service.BufferService;
 
 import java.util.Random;
 
-public class Producer {
-    private BottleBuilder bottleBuilder;
-    private Random random = new Random();
+public class Producer implements Runnable {
+    private final BufferService bufferService;
+    private final BottleBuilder bottleBuilder;
+    private final Random random = new Random();
 
-    public Producer(BottleBuilder bottleBuilder) {
+    public Producer(BufferService bufferService, BottleBuilder bottleBuilder) {
+        this.bufferService = bufferService;
         this.bottleBuilder = bottleBuilder;
     }
 
-    public Bottle produceBottle() {
+    @Override
+    public void run() {
+        while (true) {
+            try {
+                Thread.sleep(1000);
+                Bottle bottle = produceBottle(); //Opdelt fra buffer for uafhængig debugging inden den videresendes
+                bufferService.addBottle(bottle);
+                System.out.println("Produceret: " + bottle);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+    }
+
+    private Bottle produceBottle() {
         int size = random.nextInt(1500) + 250;
         String[] names = {"øl", "sodavand"};
         String name = names[random.nextInt(names.length)];
         char[] pantType = {'A', 'B', 'C'};
-        char pant = pantType[random.nextInt(names.length)];
-        int type;
+        char pant = pantType[random.nextInt(pantType.length)];
+        int type = 99;
 
         return bottleBuilder.createBottle(size, name, pant, type);
     }

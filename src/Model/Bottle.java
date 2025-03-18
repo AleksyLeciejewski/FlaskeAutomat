@@ -16,6 +16,10 @@ public class Bottle {
 
     }
 
+    public Bottle(){
+
+    }
+
     public int getType() {
         return type;
     }

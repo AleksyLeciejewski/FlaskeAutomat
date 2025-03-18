@@ -4,16 +4,13 @@ import Model.Bottle;
 
 public class BottleControllers {
 
-
-
-
     public Bottle IdentifyBottle(Bottle bottle){
         if (bottle.name.contains("øl")){
-        notify();
+        notifyAll();
         }
 
         if(bottle.name.contains("sodavand")){
-        notify();
+        notifyAll();
         }
 
     return bottle;}
