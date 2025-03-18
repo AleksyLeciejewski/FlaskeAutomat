@@ -8,8 +8,10 @@ public class Consumer implements Runnable {
     public void run() {
     while(true){
         try{
-        Bottle bottle
-
+        Bottle bottle = bufferService.removeBottle();
+        System.out.println("Consumer: Behandler " + bottle);
+        Thread.sleep(1500);
+            System.out.println("");
 
         }catch (InterruptedException e){
             e.printStackTrace();
