@@ -1,24 +1,23 @@
 package Service;
 
 import Model.Bottle;
-
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.List;
 
 public class BufferService {
+    private final LinkedBlockingQueue<Bottle> buffer;
 
-    private LinkedBlockingQueue<Bottle> buffer;
-    private List<Bottle> bottles;
-
-    public BufferService(LinkedBlockingQueue<Bottle> buffer){
-        this.buffer = buffer;
+    public BufferService(int capacity) {
+        this.buffer = new LinkedBlockingQueue<>(capacity);
     }
 
-    public synchronized void addBottle(Object object) throws InterruptedException {
-        while(buffer.remainingCapacity() == 0){
-            wait();
-        }
-        buffer.put(new Bottle());
-        notifyAll();
+    public void addBottle(Bottle bottle) throws InterruptedException {
+        buffer.put(bottle); // Blokerer, hvis køen er fuld
+        System.out.println("Producer: Tilføjede " + bottle);
+    }
+
+    public Bottle removeBottle() throws InterruptedException {
+        Bottle bottle = buffer.take(); // Blokerer, hvis køen er tom
+        System.out.println("Consumer: Fjernede " + bottle);
+        return bottle;
     }
 }
