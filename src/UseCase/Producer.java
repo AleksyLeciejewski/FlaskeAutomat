@@ -1,6 +1,6 @@
+package UseCase;
+
 import Model.Bottle;
-import Service.BottleBuilder;
-import Service.BufferService;
 
 import java.util.Random;
 

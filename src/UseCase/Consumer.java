@@ -1,9 +1,9 @@
-package Service;
+package UseCase;
 
 import Model.Bottle;
 
 public class Consumer implements Runnable {
-    private final BufferService bufferService; 
+    private final BufferService bufferService;
 
     public Consumer(BufferService bufferService) {
         this.bufferService = bufferService;

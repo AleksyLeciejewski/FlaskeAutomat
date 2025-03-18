@@ -1,7 +1,6 @@
-package Service;
+package UseCase;
 
 import Model.Bottle;
-import java.util.ArrayList;
 
 public class BottleBuilder {
 

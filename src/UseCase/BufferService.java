@@ -1,4 +1,4 @@
-package Service;
+package UseCase;
 
 import Model.Bottle;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -12,7 +12,7 @@ public class BufferService {
 
     public void addBottle(Bottle bottle) throws InterruptedException {
         buffer.put(bottle); // Blokerer, hvis køen er fuld
-        System.out.println("Producer: Tilføjede " + bottle);
+        System.out.println("UseCase.Producer: Tilføjede " + bottle);
     }
 
     public Bottle removeBottle() throws InterruptedException {
