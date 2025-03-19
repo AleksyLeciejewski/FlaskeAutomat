@@ -1,11 +1,17 @@
 import UseCase.StartOperation;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
+        StartOperation operation = new StartOperation();
+        operation.start();
 
-new StartOperation();
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
 
+        System.out.println("Stopper produktion");
+        operation.stop();
     }
 }

@@ -27,4 +27,21 @@ public class Bottle {
     public void setType(int type) {
         this.type = type;
     }
+    @Override
+    public String toString() {
+        return "Bottle{" +
+                "size=" + size +
+                ", name='" + name + '\'' +
+                ", pant=" + pant +
+                ", type=" + type +
+                '}';
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

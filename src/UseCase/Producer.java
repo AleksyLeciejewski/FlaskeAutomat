@@ -1,7 +1,6 @@
 package UseCase;
 
 import Model.Bottle;
-
 import java.util.Random;
 
 public class Producer implements Runnable {
@@ -16,10 +15,10 @@ public class Producer implements Runnable {
 
     @Override
     public void run() {
-        while (true) {
+        while (!Thread.currentThread().isInterrupted()) {
             try {
                 Thread.sleep(1000);
-                Bottle bottle = produceBottle(); //Opdelt fra buffer for uafhængig debugging inden den videresendes
+                Bottle bottle = produceBottle();
                 bufferService.addBottle(bottle);
                 System.out.println("Produceret: " + bottle);
             } catch (InterruptedException e) {
@@ -29,13 +28,14 @@ public class Producer implements Runnable {
     }
 
     private Bottle produceBottle() {
-        int size = random.nextInt(1500) + 250;
+        int[] sizes = {330, 500, 750, 1000, 1500};
         String[] names = {"øl", "sodavand"};
-        String name = names[random.nextInt(names.length)];
-        char[] pantType = {'A', 'B', 'C'};
-        char pant = pantType[random.nextInt(pantType.length)];
-        int type = 99;
+        char[] pantTypes = {'A', 'B', 'C'};
 
-        return bottleBuilder.createBottle(size, name, pant, type);
+        int size = sizes[random.nextInt(sizes.length)];
+        String name = names[random.nextInt(names.length)];
+        char pant = pantTypes[random.nextInt(pantTypes.length)];
+
+        return bottleBuilder.createBottle(size, name, pant, 99);
     }
 }

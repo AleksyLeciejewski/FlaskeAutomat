@@ -11,12 +11,12 @@ public class BufferService {
     }
 
     public void addBottle(Bottle bottle) throws InterruptedException {
-        buffer.put(bottle); // Blokerer, hvis køen er fuld
-        System.out.println("UseCase.Producer: Tilføjede " + bottle);
+        buffer.put(bottle);
+        System.out.println("Producer: Tilføjede " + bottle);
     }
 
     public Bottle removeBottle() throws InterruptedException {
-        Bottle bottle = buffer.take(); // Blokerer, hvis køen er tom
+        Bottle bottle = buffer.take();
         System.out.println("Consumer: Fjernede " + bottle);
         return bottle;
     }
